@@ -2,22 +2,32 @@
 This is a locomotion model for the dezibot v3.
 
 # Basics
+coordinate system with EUN orientation.
 
-## Units/Coordinate System
-coordinate system with EUN orientation so a position, velocity, acceleration consists of 6 DOF with following units:
+---
+## Velocity
+Velocity consists of linear and angular velocity.
 
-|               | Linear   | Rotational |
-|---------------|----------|------------|
-| Position      | m        | rad        |
-| Velocity      | m/s      | rad/s      |
-| Accelaration  | m/s²     | rad/s²     |
-
-So velocity could be described as followed:
+The unit of linear velocity is m/s and angular velocity rad/s.
 ```
-V = [[1.0, 0.0, 1.0], [0.0, 0.0, 0.0]]
+V = [X, Y, Z, X_R, Y_R, Z_R]
 ```
-which means a velocity of 1m/s in x and z direction.
-
+---
+## Position
+Meter.
+```
+P = [X, Y, Z]
+```
+---
+## Orientation
+3x3 rotation matrix
+```
+R =
+[ R[0] R[1] R[2] ]
+[ R[3] R[4] R[5] ]
+[ R[6] R[7] R[8] ]
+```
+---
 ## Motor
 The locomotion is based on two vibration motors which can be powered by a 8 byte PWM signal.
 
