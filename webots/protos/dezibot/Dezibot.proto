@@ -1,0 +1,160 @@
+#VRML_SIM R2021b utf8
+# tags: nonDeterministic
+# template language: javascript
+
+PROTO Dezibot [
+  field SFVec3f	translation 0 0 0
+  field SFRotation rotation 0 0 0 0
+  field SFString name "dezibotv3"
+  field SFBool supervisor TRUE
+  field SFBool motor TRUE
+  field SFBool hitbox FALSE
+
+  # Seed -1 is using timed-based seed.
+  field SFFloat seed -1
+
+  # Scales all tolerances equally.
+  field SFFloat tolerance 1.00
+]
+{
+  %<
+  import * as wbrandom from 'wbrandom.js';
+
+  const seed = fields.seed.value;
+  if (seed === -1) 
+    wbrandom.seed(Date.now())
+  else
+    wbrandom.seed(seed)
+
+  const pcbRadius = 0.025;
+  const pcbHeight = 0.001;
+  const pcbDrillInset = 0.0025
+
+  const legHeight = 0.02
+  const legRadius = 0.0025
+
+  const motorZInset = 0.005
+  const motorXInset = 0.001
+  const motorRadius = 0.002
+  const motorDepth = 0.002
+
+  // DIN ISO_2768-1 class f for tolerance range
+  const pcbRadiusTol = 0.00015
+  const pcbHeightTol = 0.00005
+  const legHeightTol = 0.0001
+  const legRadiusTol = 0.00005
+
+  const tolerance = fields.tolerance.value
+
+  const realPcbRadius = pcbRadius + wbrandom.real(-pcbRadiusTol, pcbRadiusTol) * tolerance
+  const realPcbHeight = pcbHeight + wbrandom.real(-pcbHeightTol, pcbHeightTol) * tolerance
+  const realPcbDrillInset = pcbDrillInset
+
+  const realLegHeight = legHeight + wbrandom.real(-legHeightTol, legHeightTol) * tolerance
+  const realLegRadius = legRadius + wbrandom.real(-legRadiusTol, legRadiusTol) * tolerance
+
+  const outerCircleRadius = realPcbRadius - realPcbDrillInset
+  const innerCircleRadius = outerCircleRadius / 2
+  const triSideLength = outerCircleRadius * Math.sqrt(3)
+
+  const legY = realLegHeight / 2
+  const legEast = {"x":-innerCircleRadius, "y": legY, "z": -(triSideLength / 2)}
+  const legWest = {"x":-innerCircleRadius, "y": legY, "z": (triSideLength / 2)}
+  const legSouth = {"x":outerCircleRadius, "y": legY, "z": 0}
+
+  const centerOfMass = {
+    "x": realPcbRadius - 0.02,
+    "y": realLegHeight + realPcbHeight,
+    "z": 0
+  }
+
+  const motorY = (realLegHeight - motorRadius)
+  const motorZ = realPcbRadius - motorZInset
+  const motorX = -((innerCircleRadius - (motorRadius * 2)) - motorXInset)
+  const motorEast = {"x": motorX, "y": motorY, "z": -motorZ}
+  const motorWest = {"x": motorX, "y": motorY, "z": motorZ}
+  >%
+  Robot {
+    translation IS translation
+    rotation IS rotation
+    supervisor IS supervisor
+    children [
+      DEF BODY Group {
+        children [
+          # Circuit Board
+          Transform {
+            translation 0 %<= realPcbHeight / 2 + legHeight >% 0
+            children [
+              Shape {
+                appearance Pcb {}
+                geometry Cylinder {
+                  height %<= realPcbHeight >%
+                  radius %<= realPcbRadius >%
+                }
+              }
+            ]
+          }
+
+          # Southern Leg
+          Transform {
+            translation %<= legSouth.x >% %<= legSouth.y  >% %<= legSouth.z >%
+            children [
+              DEF LEG Shape {
+                appearance Plastic {}
+                geometry Cylinder {
+                  height %<= realLegHeight >%
+                  radius %<= realLegRadius >%
+                  subdivision 6
+                }
+              }
+            ]
+          }
+
+          # Western leg 
+          Transform {
+            translation %<= legWest.x >% %<= legWest.y >% %<= legWest.z >%
+            children [ USE LEG ]
+          }
+
+          # Eastern leg
+          Transform {
+            translation %<= legEast.x >% %<= legEast.y >% %<= legEast.z >%
+            children [ USE LEG ]
+          }
+        ]
+      }
+      %< if (fields.motor.value) { >%
+        DeziMotor {
+          name "motorEast"
+          translation %<= motorEast.x >% %<= motorEast.y >% %<= motorEast.z >%
+        }
+        DeziMotor {
+          name "motorWest"
+          translation %<= motorWest.x >% %<= motorWest.y >% %<= motorWest.z >%
+        }
+      %< } >%
+      %< if (fields.hitbox.value) { >%
+      Shape {
+        appearance PBRAppearance {
+          baseColor 1 0 0
+          transparency 0.8
+          roughness 0
+          metalness 0
+        }
+        geometry Sphere {}
+      }
+      %< } >%
+      Emitter {
+        channel 1
+      }
+    ]
+    boundingObject USE BODY
+    physics Physics {
+      density -1
+      centerOfMass %<= centerOfMass.x >% %<= centerOfMass.y >% %<= centerOfMass.z >%
+      mass 0.0275233
+    }
+    controller "dezibot"
+    name IS name
+  }
+}

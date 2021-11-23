@@ -1,0 +1,55 @@
+#VRML_SIM R2021b utf8
+
+PROTO DeziMotor [
+  field SFVec3f translation 0 0 0
+  field SFRotation rotation 0 0 0 0
+  field SFString name "motor"
+  field SFFloat height 0.002
+  field SFFloat radius 0.002
+]
+{
+  HingeJoint {
+    jointParameters HingeJointParameters {
+      anchor IS translation
+      axis 0 0 1
+    }
+    device [
+      RotationalMotor {
+        name IS name
+        maxTorque 0.01
+        maxVelocity 2000
+      }
+    ]
+    endPoint Solid {
+      translation IS translation
+      name %{= '"' .. fields.name.value .. '_shape"' }%
+      children [
+        DEF MOTOR Transform {
+          rotation 0 0.7071 0.7071 3.1416
+          children [
+            Shape {
+              appearance BrushedAluminium {
+                colorOverride 1 1 1
+                textureTransform TextureTransform {
+                  scale 0.1 0.1
+                  rotation 1.5708
+                } 
+              }
+              geometry Cylinder {
+                height IS height
+                radius IS radius
+                subdivision 12
+              }
+            }
+          ]
+        }
+      ]
+      boundingObject USE MOTOR
+      physics Physics {
+        centerOfMass 0 %{= fields.radius.value / 2}% 0
+        density -1
+        mass 0.0003315
+      }
+    }
+  }
+}

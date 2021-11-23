@@ -1,0 +1,44 @@
+#VRML_SIM R2021b utf8
+# template language: javascript
+
+# This is the supervisor which parses webots fields into the controller to provide a convenient interface for the supervisor.
+PROTO Dezimaster [
+  field SFString controller "dezimaster" # The definition of the robot in proto.
+  field MFString id [] # webots ids
+  field MFString track [] # Fields that get tracked. Available: ["time", "position", "orientation", "velocity"]
+  field SFFloat length 1000 # Length of tracking in ms.
+]
+{
+  %<
+  let controllerArgs = '';
+
+  function addStringLiteral(value) {
+    controllerArgs += `"` + value + `"` + ' '
+  }
+
+  function parseArgs(id, argField) {
+    addStringLiteral(id)
+    argField.value.forEach(addStringLiteral)
+  }
+
+  function parseArg(id, argField) {
+    addStringLiteral(id)
+    addStringLiteral(argField.value.toString())
+  }
+
+  parseArgs("-id", fields.id)
+  parseArgs("-track", fields.track)
+  parseArg("-length", fields.length)
+  >%
+  Robot {
+    children [
+      Receiver {
+        channel 1
+      }
+    ]
+    name "dezimaster"
+    supervisor TRUE
+    controller IS controller
+    controllerArgs [ %<= controllerArgs >% ]
+  }
+}
