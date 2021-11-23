@@ -8,7 +8,7 @@ PROTO Dezibot [
   field SFString name "dezibotv3"
   field SFBool supervisor TRUE
   field SFBool motor TRUE
-  field SFBool hitbox FALSE
+  field SFBool viewbox FALSE
 
   # Seed -1 is using timed-based seed.
   field SFFloat seed -1
@@ -133,7 +133,7 @@ PROTO Dezibot [
           translation %<= motorWest.x >% %<= motorWest.y >% %<= motorWest.z >%
         }
       %< } >%
-      %< if (fields.hitbox.value) { >%
+      %< if (fields.viewbox.value) { >%
       Shape {
         appearance PBRAppearance {
           baseColor 1 0 0

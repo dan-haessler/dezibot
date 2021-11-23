@@ -43,58 +43,60 @@ SpotLight {
   intensity 3
   location 1 20 1
 }
+# definition id = name
+# viewbox so they can be seen far away
 DEF ALPHA Dezibot {
   translation -10 0 -10
   rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
-  hitbox TRUE
+  viewbox TRUE
   name "ALPHA"
 }
 DEF BRAVO Dezibot {
   translation 0 0 -10
   rotation 0.9360324050019263 -0.3497244350160562 0.03919383036920731 8.349707551336196e-16
-  hitbox TRUE
+  viewbox TRUE
   name "BRAVO"
 }
 DEF CHARLIE Dezibot {
   translation 10 0 -10
   rotation 0.9959985231845111 -0.07666184395907953 -0.0459336858423846 9.159815861167843e-16
-  hitbox TRUE
+  viewbox TRUE
   name "CHARLIE"
 }
 DEF ECHO Dezibot {
   translation -10 0 0
   rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
-  hitbox TRUE
+  viewbox TRUE
   name "ECHO"
 }
 DEF FOXTROT Dezibot {
   translation 0 0 0
   rotation 0.9360324050019263 -0.3497244350160562 0.03919383036920731 8.349707551336196e-16
-  hitbox TRUE
+  viewbox TRUE
   name "FOXTROT"
 }
 DEF GOLF Dezibot {
   translation 10 0 0
   rotation 0.9959985231845111 -0.07666184395907953 -0.0459336858423846 9.159815861167843e-16
-  hitbox TRUE
+  viewbox TRUE
   name "GOLF"
 }
 DEF HOTEL Dezibot {
   translation -10 0 10
   rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
-  hitbox TRUE
+  viewbox TRUE
   name "HOTEL"
 }
 DEF INDIA Dezibot {
   translation 0 0 10
   rotation 0.9360324050019263 -0.3497244350160562 0.03919383036920731 8.349707551336196e-16
-  hitbox TRUE
+  viewbox TRUE
   name "INDIA"
 }
 DEF JULIETT Dezibot {
   translation 10 0 10
   rotation 0.9959985231845111 -0.07666184395907953 -0.0459336858423846 9.159815861167843e-16
-  hitbox TRUE
+  viewbox TRUE
   name "JULIETT"
 }
 # Definition and name of the dezibots should be identical and not longer than 16 characters, otherwise the motor tracking does not work.
