@@ -1,5 +1,4 @@
 # Webots
-Three protos/controller are relevant for this project.
 
 ## Dezibot
   * Three rigid legs
@@ -16,8 +15,13 @@ Three protos/controller are relevant for this project.
       * currently (20mm - 25mm, 20mm + 1mm, 0mm)
       * top side of circuit board with z near the uv led
 
-## Motor control.
-The [python controller for the dezibot](./controllers/dezibot/dezibot.py) is an example of the usage. It has a very simple structure. Have fun.
+## Controllers
+---
+### Dezibot
+
+The file [./controllers/dezibot/dezibot.py](./controllers/dezibot/dezibot.py) has an example of the usage. This is what you want! It is the program that gets executed for every dezibot in your world.
+
+You can use this however you want but the intended usage is this one:
 ```
 # Import 
 from robot import DezibotController
@@ -39,6 +43,7 @@ controller.start()
 
 ```
 ## Dezimaster
+* Only necessary for technical reasons to track (also later to set the velocity), no need to look at this one [./controllers/dezibot/dezimaster.py](./controllers/dezibot/dezibot.py)
 * Supervisor to track and set the velocity of the dezibots from a given model.
 * Available tracking:
   * time

@@ -24,7 +24,7 @@ SpotLight {
   intensity 3
   location 1 2 1
 }
-# Name doesn't matter here as long as it is unique
+# Name doesn't matter here as long as it is unique.
 Dezibot {
   translation -7.488452619026682e-18 -3.353711999911496e-06 -8.783077714460036e-13
   rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
