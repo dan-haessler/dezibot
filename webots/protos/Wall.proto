@@ -1,0 +1,21 @@
+#VRML_SIM R2021b utf8
+
+PROTO Wall [
+  field SFVec3f translation 0 0 0
+  field SFRotation rotation 0 1 0 0
+  field SFVec3f size 1 1 1
+  field SFNode appearance RedBricks {
+    textureTransform TextureTransform {
+      scale 2 2
+      rotation 0
+    } 
+  }
+]
+{
+  TexturedBox {
+    translation IS translation
+    rotation IS rotation
+    appearance IS appearance
+    size IS size
+  }
+}

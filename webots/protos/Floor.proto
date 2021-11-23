@@ -1,0 +1,16 @@
+#VRML_SIM R2021b utf8
+
+PROTO Floor [
+  field SFVec3f translation 0 0 0
+  field SFRotation rotation 0 1 0 0
+  field SFVec3f size 1 0.1 1
+  field SFNode appearance OsbWood { }
+]
+{
+  TexturedBox {
+    translation IS translation
+    rotation IS rotation
+    appearance IS appearance
+    size IS size
+  }
+}
