@@ -1,0 +1,42 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  basicTimeStep 1
+  physicsDisableLinearThreshold 1e-09
+  physicsDisableAngularThreshold 1e-09
+  coordinateSystem "EUN"
+  contactProperties [
+    ContactProperties {
+      bounceVelocity 1e-05
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.5009870148622272 0.7987481202692434 0.3331868114223382 1.3607652290559884
+  position 2.951922109969603 3.066545213993468 1.4131444539821139
+}
+Room {
+}
+SpotLight {
+  attenuation 0 0 1
+  beamWidth 0.4
+  cutOffAngle 0.6
+  direction -0.8 -2 -0.8
+  intensity 3
+  location 1 2 1
+}
+# Name doesn't matter here as long as it is unique
+Dezibot {
+  translation -7.488452619026682e-18 -3.353711999911496e-06 -8.783077714460036e-13
+  rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
+  name "ALPHA"
+}
+Dezibot {
+  translation -9.421175686935419e-18 -3.3537119999045573e-06 0.0999999999991217
+  rotation 0.9360324050019263 -0.3497244350160562 0.03919383036920731 8.349707551336196e-16
+  name "BRAVO"
+}
+Dezibot {
+  translation -3.960431150167999e-18 -3.3537119999080267e-06 0.19999999999912177
+  rotation 0.9959985231845111 -0.07666184395907953 -0.0459336858423846 9.159815861167843e-16
+  name "CHARLIE"
+}

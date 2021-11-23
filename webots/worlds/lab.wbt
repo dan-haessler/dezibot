@@ -1,0 +1,121 @@
+#VRML_SIM R2021b utf8
+WorldInfo {
+  basicTimeStep 1
+  physicsDisableLinearThreshold 1e-09
+  physicsDisableAngularThreshold 1e-09
+  coordinateSystem "EUN"
+  contactProperties [
+    ContactProperties {
+      bounceVelocity 1e-05
+    }
+  ]
+}
+Viewpoint {
+  orientation -0.7424631435423801 0.6097558008774239 0.2773920398596512 0.9586922940385537
+  position 25.119194354109872 41.084558898265584 37.9094374958811
+}
+DirectionalLight {
+  direction -2 -4 -2
+}
+DirectionalLight {
+  direction 2 4 2
+}
+Solid {
+  children [
+    Floor {
+      translation 0 -0.05 0
+      size 50 0.1 50
+      appearance OsbWood {
+        textureTransform TextureTransform {
+          scale 20 20
+        }
+      }
+    }
+  ]
+  boundingObject Plane {
+  }
+}
+SpotLight {
+  attenuation 0 0 1
+  beamWidth 0.4
+  cutOffAngle 0.6
+  direction -0.8 -2 -0.8
+  intensity 3
+  location 1 20 1
+}
+DEF ALPHA Dezibot {
+  translation -10 0 -10
+  rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
+  hitbox TRUE
+  name "ALPHA"
+}
+DEF BRAVO Dezibot {
+  translation 0 0 -10
+  rotation 0.9360324050019263 -0.3497244350160562 0.03919383036920731 8.349707551336196e-16
+  hitbox TRUE
+  name "BRAVO"
+}
+DEF CHARLIE Dezibot {
+  translation 10 0 -10
+  rotation 0.9959985231845111 -0.07666184395907953 -0.0459336858423846 9.159815861167843e-16
+  hitbox TRUE
+  name "CHARLIE"
+}
+DEF ECHO Dezibot {
+  translation -10 0 0
+  rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
+  hitbox TRUE
+  name "ECHO"
+}
+DEF FOXTROT Dezibot {
+  translation 0 0 0
+  rotation 0.9360324050019263 -0.3497244350160562 0.03919383036920731 8.349707551336196e-16
+  hitbox TRUE
+  name "FOXTROT"
+}
+DEF GOLF Dezibot {
+  translation 10 0 0
+  rotation 0.9959985231845111 -0.07666184395907953 -0.0459336858423846 9.159815861167843e-16
+  hitbox TRUE
+  name "GOLF"
+}
+DEF HOTEL Dezibot {
+  translation -10 0 10
+  rotation 0.9686148304788549 -0.22957981805919714 -0.09528072898716176 9.32231590596913e-16
+  hitbox TRUE
+  name "HOTEL"
+}
+DEF INDIA Dezibot {
+  translation 0 0 10
+  rotation 0.9360324050019263 -0.3497244350160562 0.03919383036920731 8.349707551336196e-16
+  hitbox TRUE
+  name "INDIA"
+}
+DEF JULIETT Dezibot {
+  translation 10 0 10
+  rotation 0.9959985231845111 -0.07666184395907953 -0.0459336858423846 9.159815861167843e-16
+  hitbox TRUE
+  name "JULIETT"
+}
+# Definition and name of the dezibots should be identical and not longer than 16 characters, otherwise the motor tracking does not work.
+Dezimaster {
+  id [
+    "ALPHA"
+    "BRAVO"
+    "CHARLIE"
+    "ECHO"
+    "FOXTROT"
+    "GOLF"
+    "HOTEL"
+    "INDIA"
+    "JULIETT"
+  ]
+  length 512
+  track [
+    "time"
+    "motor"
+    "position"
+    "orientation"
+    "velocity"
+  ]
+}
